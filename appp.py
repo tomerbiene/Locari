@@ -6,7 +6,7 @@ import game_logic
 
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="Locari: League of Cards", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Locari: League of Cards", page_icon="💠", layout="wide", initial_sidebar_state="collapsed")
 
 components.html("""
     <audio id="locari-bgm" loop>
