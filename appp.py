@@ -1,6 +1,29 @@
 import streamlit as st
 # Oyun müziği (Streamlit yerleşik oynatıcı)
-st.sidebar.audio("https://tomerbiene.github.io/Locari/audio/bgm.mp3", format="audio/mp3", autoplay=True, loop=True)
+# Müzik çaları sağ alta hayalet olarak sabitleyen sihirli CSS
+st.markdown(
+    """
+    <style>
+    [data-testid="stAudio"] {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 250px;
+        z-index: 9999;
+        opacity: 0.15; /* Normalde neredeyse görünmez */
+        transition: opacity 0.4s ease-in-out;
+        border-radius: 10px;
+    }
+    [data-testid="stAudio"]:hover {
+        opacity: 1.0; /* Fareyle üstüne gelince tam görünür */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Oyun müziği
+st.audio("https://tomerbiene.github.io/Locari/audio/bgm.mp3", format="audio/mp3", autoplay=True, loop=True)
 import base64
 import os
 import lol_data
