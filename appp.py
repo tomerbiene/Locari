@@ -1,4 +1,13 @@
 import streamlit as st
+# Arka plan müziğini Streamlit'e entegre etme
+st.markdown(
+    """
+    <audio autoplay loop>
+        <source src="https://tomerbiene.github.io/Locari/audio/bgm.mp3" type="audio/mp3">
+    </audio>
+    """,
+    unsafe_allow_html=True
+)
 import base64
 import os
 import lol_data
