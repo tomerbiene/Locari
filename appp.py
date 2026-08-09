@@ -1,6 +1,6 @@
 import streamlit as st
 # Oyun müziği (Streamlit yerleşik oynatıcı)
-st.audio("https://tomerbiene.github.io/Locari/audio/bgm.mp3", format="audio/mp3", autoplay=True, loop=True)
+st.sidebar.audio("https://tomerbiene.github.io/Locari/audio/bgm.mp3", format="audio/mp3", autoplay=True, loop=True)
 import base64
 import os
 import lol_data
