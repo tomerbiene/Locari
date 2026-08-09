@@ -1,32 +1,27 @@
 import streamlit as st
-# Müzik çaları sağ alta hayalet olarak sabitleyen sihirli CSS
-st.markdown(
-    """
-    <style>
-    [data-testid="stAudio"] {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 250px;
-        z-index: 9999;
-        opacity: 0.15; /* Normalde neredeyse görünmez */
-        transition: opacity 0.4s ease-in-out;
-        border-radius: 10px;
-    }
-    [data-testid="stAudio"]:hover {
-        opacity: 1.0; /* Fareyle üstüne gelince tam görünür */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Oyun müziği
-st.audio("https://tomerbiene.github.io/Locari/audio/bgm.mp3", format="audio/mp3", autoplay=True, loop=True)
 import base64
 import os
 import lol_data
 import game_logic
+
+import streamlit.components.v1 as components
+
+st.set_page_config(page_title="Locari: League of Cards", layout="wide", initial_sidebar_state="collapsed")
+
+components.html("""
+    <audio id="locari-bgm" loop>
+        <source src="https://tomerbiene.github.io/Locari/audio/bgm.mp3" type="audio/mp3">
+    </audio>
+    <script>
+    window.parent.document.addEventListener('click', function() {
+        var bgm = document.getElementById('locari-bgm');
+        if (bgm && bgm.paused) {
+            bgm.volume = 0.3;
+            bgm.play().catch(function(e) { console.log('Müzik başlatılamadı:', e); });
+        }
+    }, { once: true });
+    </script>
+""", height=0)
 
 # ========================================================
 # BÖLGE VE SİNERJİ ANSİKLOPEDİSİ (EKSİKSİZ 160+ ULTIMATE SÜRÜM)
@@ -235,9 +230,6 @@ def play_champion_voice(champ_name):
         """
         st.markdown(audio_html, unsafe_allow_html=True)
 
-
-# --- Sayfa Yapılandırması ---
-st.set_page_config(page_title="Locari: League of Cards", layout="wide", initial_sidebar_state="collapsed")
 
 # ---------------------------------------------------------
 # 2. CSS STİLLERİ (Premium 3D Tasarım)
@@ -883,18 +875,13 @@ else:
             with b_col:
                 if st.session_state.phase == "resolve":
                     banner_class = "banner-info"
-                    winner_card = None
                     if "WON" in st.session_state.combat_log:
                         banner_class = "banner-win"
-                        winner_card = st.session_state.arena_p_card
+                        play_champion_voice(st.session_state.arena_p_card['name'])
                     elif "LOST" in st.session_state.combat_log:
                         banner_class = "banner-lose"
-                        winner_card = st.session_state.arena_b_card
                     elif "DRAW" in st.session_state.combat_log:
                         banner_class = "banner-draw"
-
-                    if winner_card:
-                        play_champion_voice(winner_card['name'])
 
                     st.markdown(
                         f"<div class='banner {banner_class}' style='margin: 2px 0; padding: 6px;'>{st.session_state.combat_log}</div>",
