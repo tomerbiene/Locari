@@ -1,0 +1,13 @@
+# Python Sanal Ortam Klasörü (En önemlisi)
+.venv/
+
+# PyCharm Ayarları
+.idea/
+
+# Python Önbellek Dosyaları
+__pycache__/
+*.pyc
+
+# Geçici/Test Dosyaları (İstersen)
+deneme.py
+index.html.py

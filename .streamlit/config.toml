@@ -1,0 +1,10 @@
+[theme]
+# Oyunun genel vurgu rengi (Altın Sarısı)
+primaryColor = "#c8aa6e"
+# Dumanlı Derin Lacivert (Ölü siyah değil, zengin taban rengi)
+backgroundColor = "#121926"
+# Menüler ve arkaplan panelleri için destekleyici koyu slate
+secondaryBackgroundColor = "#1d2738"
+# Okunabilir, yumuşak krem metin
+textColor = "#f0e6d2"
+font = "sans serif"

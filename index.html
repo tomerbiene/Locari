@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locari: League of Cards</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #121926;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        /* Oyun ekranını tam ekran kaplayan görünmez çerçeve */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Tarayıcı ses engelini aşmak için şık bir başlangıç paneli */
+        #sound-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(18, 25, 38, 0.92);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .start-btn {
+            background: linear-gradient(135deg, #c8aa6e, #7a5c29);
+            color: #000;
+            font-weight: 900;
+            font-size: 18px;
+            padding: 15px 40px;
+            border: 2px solid #f0e6d2;
+            border-radius: 8px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            box-shadow: 0 0 25px rgba(200, 170, 110, 0.5);
+            text-transform: uppercase;
+        }
+        .start-btn:hover {
+            background: linear-gradient(135deg, #ffd700, #c8aa6e);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tarayıcı İzin Ekranı (İlk tıklamada müziği serbest bırakır) -->
+    <div id="sound-overlay">
+        <h1 style="color: #c8aa6e; letter-spacing: 3px; margin-bottom: 10px;">LOCARI</h1>
+        <p style="color: #f0e6d2; opacity: 0.8; margin-bottom: 30px; letter-spacing: 1px;">LEAGUE OF CARDS - BATTLE ARENA</p>
+        <button class="start-btn" onclick="startExperience()">ENTER THE RIFT</button>
+    </div>
+
+    <!-- Arka Plan Müzik Motoru (Asla kapanmaz, sıfır lag) -->
+    <audio id="bgm" loop>
+        <source src="audio/bgm.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Senin Streamlit Oyunun -->
+    <iframe src="http://localhost:8501" id="game-frame"></iframe>
+
+    <script>
+        function startExperience() {
+            var audio = document.getElementById("bgm");
+            audio.volume = 0.25; // %25 ses seviyesi
+            audio.play().catch(error => console.log("Ses oynatılamadı:", error));
+
+            // Karşılama ekranını yumuşatarak kaldır ve oyunu başlat
+            var overlay = document.getElementById("sound-overlay");
+            overlay.style.opacity = "0";
+            setTimeout(function() {
+                overlay.style.display = "none";
+            }, 500);
+        }
+    </script>
+</body>
+</html>
