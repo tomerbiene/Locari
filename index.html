@@ -69,6 +69,16 @@
     <iframe src="http://localhost:8501" id="game-frame"></iframe>
 
     <script>
+        // Kullanıcı sayfada herhangi bir yere ilk kez tıkladığında arka plan müziğini başlatır
+document.addEventListener('click', function() {
+    var bgm = document.getElementById('bgm');
+    if (bgm && bgm.paused) {
+        bgm.volume = 0.3; // İstersen ses seviyesini buradan ayarlayabilirsin (0.3 = %30)
+        bgm.play().catch(function(error) {
+            console.log("Müzik engellendi:", error);
+        });
+    }
+}, { once: true });
         function startExperience() {
             var audio = document.getElementById("bgm");
             audio.volume = 0.25; // %25 ses seviyesi
